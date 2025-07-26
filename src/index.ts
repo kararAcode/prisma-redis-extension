@@ -46,14 +46,14 @@ export function createPrismaRedisExtension({
         query: {
             $allModels: {
                 async $allOperations({ model, operation, query, args }) {
-                    const params = { model, operation, query, args }
+                    const params = { model, operation, query, args };
                     if (
-                        (operation === "findUnique" ||
-                            operation === "findFirst" ||
-                            operation === "findMany" ||
-                            operation === "count" ||
-                            operation === "aggregate" ||
-                            operation === "groupBy") 
+                        operation === "findUnique" ||
+                        operation === "findFirst" ||
+                        operation === "findMany" ||
+                        operation === "count" ||
+                        operation === "aggregate" ||
+                        operation === "groupBy"
                     ) {
                         handleCacheFunctionCreation(params);
                         const cacheFunction = cache[model];
@@ -63,6 +63,20 @@ export function createPrismaRedisExtension({
                         }
 
                         return await cacheFunction({ cb: () => query(args), params });
+                    } else if (
+                        operation === "create" ||
+                        operation === "createMany" ||
+                        operation === "update" ||
+                        operation === "updateMany" ||
+                        operation === "delete" ||
+                        operation === "deleteMany" ||
+                        operation === "upsert"
+                    ) {
+                        const result = await query(args);
+
+                        await cache.invalidateAll(`*${model}~*`);
+
+                        return result;
                     }
                 },
             },
