@@ -3,7 +3,7 @@
   "include": ["src"],
   "exclude": ["./src/middleware.ts"],
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "es2015",
     "lib": ["es2019"],
     "importHelpers": true,
     "declaration": true,
