@@ -16,7 +16,7 @@
     "start": "tsdx watch",
     "build": "tsc",
     "clean": "rimraf dist/ coverage/",
-    "prepare": "tsdx build",
+    "prepare": "tsc",
     "test": "vitest run",
     "test:watch": "vitest -w",
     "coverage": "c8 --reporter=lcov vitest run --coverage",
