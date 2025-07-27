@@ -5,15 +5,15 @@ import { CreatePrismaRedisCache, FetchFromPrisma, MiddlewareParams } from "./typ
 const DEFAULT_CACHE_TIME = 0;
 
 export function createPrismaRedisExtension({
-    models,
+    // models,
     onDedupe,
     onError,
     onHit,
     onMiss,
     storage,
     cacheTime = DEFAULT_CACHE_TIME,
-    excludeModels = [],
-    excludeMethods = [],
+    // excludeModels = [],
+    // excludeMethods = [],
     transformer,
 }: CreatePrismaRedisCache) {
     const cacheOptions = {
@@ -27,7 +27,7 @@ export function createPrismaRedisExtension({
     };
     const cache: any = createCache(cacheOptions);
 
-    const handleCacheFunctionCreation = (params) => {
+    const handleCacheFunctionCreation = (params: {model: string, operation: string, args: Object, query: Function}) => {
         if (!cache[params.model]) {
             cache.define(
                 params.model,
@@ -45,7 +45,7 @@ export function createPrismaRedisExtension({
     return Prisma.defineExtension({
         query: {
             $allModels: {
-                async $allOperations({ model, operation, query, args }) {
+                async $allOperations({ model, operation, query, args }: {model: string, operation: string, args: Object, query: Function}) {
                     const params = { model, operation, query, args };
                     if (
                         operation === "findUnique" ||
