@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "start": "tsdx watch",
-    "build": "tsdx build",
+    "build": "tsc",
     "clean": "rimraf dist/ coverage/",
     "prepare": "tsdx build",
     "test": "vitest run",
@@ -75,7 +75,7 @@
     }
   ],
   "engines": {
-    "node": "^16.x || ^18.x || ^20.x",
+    "node": "^16.x || ^18.x || ^20.x || ^22.x",
     "npm": "^10.0.0"
   },
   "repository": {
