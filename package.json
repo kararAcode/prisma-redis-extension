@@ -1,5 +1,5 @@
 {
-  "name": "prisma-redis-extension",
+  "name": "@kararacode/prisma-redis-extension",
   "author": "kararAcode",
   "version": "1.0.0",
   "description": "Prisma Extension for caching results of queries in Redis",
