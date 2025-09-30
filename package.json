@@ -1,0 +1,97 @@
+{
+  "name": "prisma-redis-extension",
+  "author": "kararAcode",
+  "version": "1.0.0",
+  "description": "Prisma Extension for caching results of queries in Redis",
+  "license": "Hippocratic-3.0",
+  "type": "module",
+  "files": ["dist"],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+      "start": "tsdx watch",
+      "build": "tsc",
+      "clean": "rimraf dist/ coverage/",
+      "prepare": "tsc",
+      "test": "vitest run",
+      "test:watch": "vitest -w",
+      "coverage": "c8 --reporter=lcov vitest run --coverage",
+      "check-types": "tsc",
+      "prettier": "prettier --cache \"**/**/*.+(json|ts)\"",
+      "format": "npm run prettier -- --write",
+      "check-format": "npm run prettier -- --list-different",
+      "validate": "npm-run-all --parallel check-types check-format build",
+      "size": "size-limit",
+      "analyze": "size-limit --why"
+  },
+  "dependencies": {
+      "async-cache-dedupe": "2.0.0",
+      "ioredis": "5.3.2"
+  },
+  "peerDependencies": {
+      "@prisma/client": "6.8.2",
+      "prisma": "6.8.2"
+  },
+  "devDependencies": {
+      "@prisma/client": "6.8.2",
+      "@ianvs/prettier-plugin-sort-imports": "4.1.1",
+      "@size-limit/preset-small-lib": "11.0.0",
+      "@types/ioredis-mock": "8.2.5",
+      "@vitest/coverage-c8": "0.33.0",
+      "@vitest/coverage-v8": "0.34.6",
+      "c8": "8.0.1",
+      "husky": "8.0.3",
+      "ioredis-mock": "8.9.0",
+      "lint-staged": "15.2.0",
+      "npm-run-all": "4.1.5",
+      "prettier": "3.1.0",
+      "rimraf": "5.0.5",
+      "size-limit": "11.0.0",
+      "tsdx": "0.14.1",
+      "tslib": "2.6.2",
+      "typescript": "5.3.2",
+      "vitest": "0.34.6"
+  },
+  "husky": {
+      "hooks": {
+          "pre-commit": "npm run check-types && lint-staged && npm run build"
+      }
+  },
+  "lint-staged": {
+      "**/**/*.+(ts)": [
+          "prettier --write",
+          "git add"
+      ]
+  },
+  "size-limit": [
+      {
+          "path": "dist/prisma-redis-extension.cjs.production.min.js",
+          "limit": "16 KB"
+      },
+      {
+          "path": "dist/prisma-redis-extension.esm.js",
+          "limit": "16 KB"
+      }
+  ],
+  "engines": {
+      "node": "^16.x || ^18.x || ^20.x || ^22.x",
+      "npm": "^10.0.0"
+  },
+  "repository": {
+      "type": "git",
+      "url": "git+https://github.com/kararAcode/prisma-redis-extension.git"
+  },
+  "keywords": [
+      "prisma",
+      "redis",
+      "prisma-caching",
+      "redis-caching",
+      "prisma-extension",
+      "caching"
+  ],
+  "bugs": {
+      "url": "https://github.com/kararAcode/prisma-redis-extension/issues"
+  },
+  "homepage": "https://github.com/kararAcode/prisma-redis-extension#readme"
+}
