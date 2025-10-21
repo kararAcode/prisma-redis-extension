@@ -59,6 +59,10 @@ export function createPrismaRedisExtension({
         query: {
             $allModels: {
                 async $allOperations({ model, operation, query, args }: any) {
+
+                    if (storage?.options?.client.status !== 'ready') {
+                        return query(args);
+                    }
                     try {
                         const params = { model, operation, query, args };
                         if (

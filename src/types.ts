@@ -77,7 +77,7 @@ export type CreatePrismaRedisCache = {
 		excludeMethods?: PrismaQueryAction[];
 		invalidateRelated?: string[] | Prisma.ModelName[];
 	}[];
-	storage?: RedisMemoryStorage | MemoryStorage;
+	storage?: RedisMemoryStorage;
 	cacheTime?: number;
 	excludeModels?: string[] | Prisma.ModelName[];
 	excludeMethods?: PrismaQueryAction[];
