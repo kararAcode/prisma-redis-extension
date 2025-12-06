@@ -1,7 +1,5 @@
 import type Redis from 'ioredis';
 
-import type { Prisma } from '@prisma/client';
-
 export type PrismaQueryAction =
 	| 'findFirst'
 	| 'findFirstOrThrow'
@@ -71,15 +69,15 @@ export type TtlFunction = (data: any) => number;
 
 export type CreatePrismaRedisCache = {
 	models?: {
-		model: (string & {}) | Prisma.ModelName;
+		model: (string & {});
 		cacheKey?: string;
 		cacheTime?: number | TtlFunction;
 		excludeMethods?: PrismaQueryAction[];
-		invalidateRelated?: string[] | Prisma.ModelName[];
+		invalidateRelated?: string[];
 	}[];
 	storage?: RedisMemoryStorage;
 	cacheTime?: number;
-	excludeModels?: string[] | Prisma.ModelName[];
+	excludeModels?: string[];
 	excludeMethods?: PrismaQueryAction[];
 	onError?: (key: string) => void;
 	onHit?: (key: string) => void;
