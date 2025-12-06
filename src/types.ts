@@ -54,16 +54,6 @@ export type RedisMemoryOptions = {
 	log?: any;
 };
 
-export type MemoryStorage = {
-	type: 'memory';
-	options?: MemoryStorageOptions;
-};
-
-export type MemoryStorageOptions = {
-	size?: number;
-	invalidation?: boolean;
-	log?: any;
-};
 
 export type TtlFunction = (data: any) => number;
 
